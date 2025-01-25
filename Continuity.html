@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Image Display</title>
+</head>
+<body>
+    <div>
+        <label for="dropdown1">Select Option 1:</label>
+        <select id="dropdown1">
+            <option value="default">--Select--</option>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+        </select>
+
+        <label for="dropdown2">Select Option 2:</label>
+        <select id="dropdown2">
+            <option value="default">--Select--</option>
+            <option value="optionA">Option A</option>
+            <option value="optionB">Option B</option>
+        </select>
+
+        <button id="submitBtn">Submit</button>
+    </div>
+
+    <div id="imageDisplay" style="margin-top: 20px;">
+        <!-- Image will be displayed here -->
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function () {
+            const dropdown1 = document.getElementById('dropdown1').value;
+            const dropdown2 = document.getElementById('dropdown2').value;
+            const imageDisplay = document.getElementById('imageDisplay');
+
+            console.log('Dropdown 1 value:', dropdown1);
+            console.log('Dropdown 2 value:', dropdown2);
+
+            if (dropdown1 === 'default' || dropdown2 === 'default') {
+                imageDisplay.innerHTML = '<p style="color: red;">Please select an option from both dropdowns!</p>';
+                return;
+            }
+
+            // Map the combination of dropdown values to images
+            const imageMap = {
+                'option1-optionA': 'https://rituparnsomvanshi.wordpress.com/wp-content/uploads/2025/01/f59ca7d5d5ae70d4f1c169e410bf5e48.jpg',
+                'option1-optionB': 'https://rituparnsomvanshi.wordpress.com/wp-content/uploads/2025/01/61j5z-oyuul._ac_ul480_fmwebp_ql65_.webp',
+                'option2-optionA': 'https://rituparnsomvanshi.wordpress.com/wp-content/uploads/2025/01/e63e0e2f628642a3ef6020327a80381f.jpg',
+                'option2-optionB': 'https://rituparnsomvanshi.wordpress.com/wp-content/uploads/2025/01/cover.jpg',
+            };
+
+            const selectedKey = `${dropdown1}-${dropdown2}`;
+            console.log('Selected key:', selectedKey);
+
+            const selectedImage = imageMap[selectedKey];
+            console.log('Selected image URL:', selectedImage);
+
+            if (selectedImage) {
+                imageDisplay.innerHTML = `<img src="${selectedImage}" alt="Selected Image" style="max-width: 100%; height: auto;">`;
+            } else {
+                imageDisplay.innerHTML = '<p style="color: red;">No image found for the selected options!</p>';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
